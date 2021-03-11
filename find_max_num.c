@@ -14,27 +14,42 @@
 #define _DBG 0
 #undef _DBG
 
+/* 수의 10의 자리수를 반환 합니다. */
+int get_num_length(int a) {
+    int cnt = 1;
+    int b = a / 10;
+
+    while( b != 0 ) {
+        b = b / 10;
+        cnt = cnt * 10;
+    }
+
+    return cnt;
+}
+
+/* 수열의 정렬합니다. */
+/* 정렬 기준은 두 수를 조합해서 최고의 값이 나오는 순서입니다. */
 int *boglebogle(int *a, int len) {
-    for (int i = 0;i < len; i++) {
-        int comp0 = (a[i]>=10?a[i]/10:a[i]);
-        int leave0 = a[i] % 10;
-        for (int b = i+1;b < len; b++) {
-            int comp1 = (a[b]>=10?a[b]/10:a[b]);
-            int leave1 = a[b] % 10;
-            if (comp0 < comp1) {
-                int tmp = a[i];
-                a[i] = a[b];
-                a[b] = tmp;
-            } else if (comp0 == comp1) {
-                if (leave0 < leave1) {
-                    int tmp = a[i];
-                    a[i] = a[b];
-                    a[b] = tmp;
-                }
+    int *pos = (int*) malloc(sizeof(int)*len);
+    for (int i = 0;i < len;i++) {
+        pos[i] = get_num_length(a[i]);
+    }
+
+    for (int x = 0;x < len; x++) {
+        for(int y = x + 1;y < len;y++) {
+            int num1 = a[x] * pos[y] * 10 + a[y];
+            int num2 = a[x] + a[y] * pos[x] * 10;
+            //printf("%d[%d], %d[%d]\n", num1, a[x], num2, a[y]);
+            if (num1 < num2) {
+                int tmpv = a[x];
+                int tmpp = pos[x];
+                pos[x] = pos[y];
+                a[x] = a[y];
+                pos[y] = tmpp;
+                a[y] = tmpv;
             }
         }
     }
-
     return a;
 }
 
@@ -74,12 +89,18 @@ char *find_max_num(int *a, int len) {
 
 int main() {
     int data[4] = {1,2,3,4};
-    int data_len = 4;
-    printf("result = %s\n",
-           find_max_num((int*)&data[0], data_len));
-
     int data1[7] = {8,2,13,4,11,10,22};
+    int data2[5] = {1,10,17,107,3};
+    int data_len = 4;
     int data_len1 = 7;
+    int data_len2 = 5;
+
+    printf("result = %s\n",
+           find_max_num((int*)&data0[0], data_len0));
+
     printf("result = %s\n",
            find_max_num((int*)&data1[0], data_len1));
+
+    printf("result = %s\n",
+           find_max_num((int*)&data2[0], data_len2));
 }
