@@ -7,21 +7,39 @@ n의 값이 주면, 1에서 n까지 이 값을 출력하면 그 값이 3의 배�
  출력 :
     1
     2
-    Frizz
+    Fizz
     4
     Buzz
-    Frizz
+    Fizz
     7
     8
-    Frizz
+    Fizz
     Buzz
     11
-    Frizz
+    Fizz
     13
     14
-    FrizzBuzz
+    FizzBuzz
 """
-
+"""
+void fizzBuzz(int n) {
+    for(int i = 1;i <= n;i++) {
+        bool three = (i % 3 == 0 ? true : false);
+        bool five = (i % 5 == 0 ? true : false);
+        if (three && five) {
+            printf("FizzBuzz\n");
+        } else {
+            if (three) {
+                printf("Fizz\n");
+            } else if (five) {
+                printf("Buzz\n");
+            } else {
+                printf("%d\n", i);
+            }
+        }
+    }
+}
+"""
 def fizzBuzz(n):
     for i in range(0, n):
         threes = ((i+1) % 3 == 0)
