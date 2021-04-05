@@ -16,17 +16,22 @@
 import math
 def solution(board):
     answer = 0
+
     y_depth = len(board)
-    if y_depth == 1:
-        if len(board[0]) > 0:
-            return max(board[0])
+
+    if y_depth == 0:
         return 0
-    elif y_depth == 0:
+
+    x_depth = len(board[0])
+    if x_depth == 0:
         return 0
-    if len(board[0]) == 1:
-        for y in range(0, len(board)):
-            if board[y][0] == 1:
-                return 1
+
+    answer = max(board[0])
+
+
+    if x_depth== 1:
+        return max([x[0] for x in board])
+
     for y in range(1, len(board)):
         for x in range(1, len(board[0])):
             if board[y][x] == 1:
@@ -42,11 +47,18 @@ def solution(board):
 
 if __name__=="__main__":
     datas = [[[0,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,1,0]],
+             [[1,1,1,1],[1,1,1,1],[1,1,1,1],[1,1,1,1]],
+             [[1,1,1,1],[1,0,0,0],[1,0,0,0],[1,0,0,0]],
+             [[1,1,1,1],[0,0,0,1],[0,0,0,1],[0,0,0,1]],
+             [[1,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,1]],
+             [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],
+             [[1,0,0,0],[0,1,1,0],[0,1,1,0],[0,0,0,1]],
              [[1,0],[1,0]],
              [[1,1,],[1,1]],
              [[0,0,1,0,]],
              [[0],[1],[0]],
-             [[]]]
+             [[]],
+             []]
     for data in datas:
         result = solution(data)
         print(data,result)
