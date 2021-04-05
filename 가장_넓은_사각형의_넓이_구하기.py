@@ -40,10 +40,14 @@ def solution(board):
                 top2 = board[y-1][x]
                 left = board[y][x-1]
                 min_val = min([top1, top2, left])
-                if (min_val > 0):
+                if min_val > 0:
                     board[y][x] = min_val + int(math.sqrt(min_val))*2 + 1
                     if answer < board[y][x]:
                         answer = board[y][x]
+                elif min_val == 0:
+                    max_val = max([top1, top2, left])
+                    if max_val == 0:
+                        answer = 1
     return answer
 
 if __name__=="__main__":
