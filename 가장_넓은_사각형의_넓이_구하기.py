@@ -13,7 +13,9 @@
 가 있다면 가장 큰 정사각형은 9
 
 """
+
 import math
+
 def solution(board):
     answer = 0
 
@@ -27,7 +29,6 @@ def solution(board):
         return 0
 
     answer = max(board[0])
-
 
     if x_depth== 1:
         return max([x[0] for x in board])
@@ -59,6 +60,7 @@ if __name__=="__main__":
              [[0],[1],[0]],
              [[]],
              []]
+    
     for data in datas:
         result = solution(data)
         print(data,result)
