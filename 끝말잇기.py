@@ -31,11 +31,13 @@ n   words   result
 5   ["hello", "observe", "effect", "take", "either", "recognize", "encourage", "ensure", "establish", "hang", "gather", "refer", "reference", "estimate", "executive"]  [0,0]
 2   ["hello", "one", "even", "never", "now", "world", "draw"] [1,3]
 """
-
 def solution(n, words):
     answer = []
-    answer_map = {words[0]:1}
 
+    if len(words) <= 1:
+        return [0,0]
+
+    answer_map = {words[0]:1}
     cnt = 0
     pos = 0
     for i in range(1,len(words)):
@@ -54,20 +56,26 @@ def solution(n, words):
     if cnt == 0:
         return [0,0]
 
-    print(f'--{words[i]} {i} {cnt}, {n}, {pos}')
+    #print(f'--{words[i]} {i} {cnt}, {n}, {pos}')
+    cnt = int(cnt/n)
     cnt += 0 if pos == n else 1
 
 
     answer.append(pos)
-    answer.append(int(cnt / n))
+    answer.append(cnt)
     return answer
 
 if __name__=="__main__":
     datas = [[3,['tank','kick','know','wheel','land','dream','mother','robot','tank'],[3,3]],
              [5,['hello','observe','effect','take','either','recognize','encourage','ensure','establish','hang','gather','refer','reference','estimate','executive'],[0,0]],
              [2,['hello','one','even','never','now','world','draw'],[1,3]],
-             [3,['hello','one','odd'],[0,0]]]
+             [3,['hello','one','odd'],[3,1]],
+             [1,['hello','hello','odd'],[1,2]],
+             [20,['ab','bc','cd','de','ef','fg'],[0,0]],
+             [20,['ab','bc','cd','de','ef','fg','ab'],[7,1]],
+             [1,[],[0,0]]]
 
     for data in datas:
         print('------------------------')
-        print(solution(data[0], data[1]))
+        result = solution(data[0], data[1])
+        print(f'{data[2]}, {result==data[2]}, {result}')
